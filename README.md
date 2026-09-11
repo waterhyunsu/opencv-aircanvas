@@ -6,17 +6,12 @@ Python과 OpenCV를 활용하여 웹캠으로 특정 색상의 오브젝트를 �
 
 ## 프로젝트 실행 결과
 
-> 프로젝트 루트 폴더에 아래 이미지를 배치하거나 깃허브 Issue 업로드 링크로 교체해 주세요.
-
-* `demo.png` : 실행 결과 캡처 이미지
-* `terminal.png` : 터미널 로그 이미지
-
 | 실행 화면 | 터미널 로그 |
 | :---: | :---: |
 | <img width="643" height="514" alt="demo png" src="https://github.com/user-attachments/assets/f53b34a5-e0ae-4040-9466-f816a6dad813" />
  |<img width="469" height="375" alt="terminal png" src="https://github.com/user-attachments/assets/e6e01a5f-ab57-424b-a8e5-4ff7ddfae7ee" />
 |
-| **스탬프 & 선 그리기 데모** | **시스템 모드 변경 로그** |
+
 
 ---
 
