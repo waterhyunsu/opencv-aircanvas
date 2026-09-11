@@ -1,4 +1,4 @@
-# OpenCV Air Canvas Master
+# OpenCV Air Canvas
 
 Python과 OpenCV를 활용하여 웹캠으로 특정 색상의 오브젝트를 추적하고, 공중에서 자유롭게 그림을 그리거나 이미지 스탬프를 찍을 수 있는 **에어 캔버스(Air Canvas)** 프로젝트입니다.
 
