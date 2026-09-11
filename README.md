@@ -6,7 +6,7 @@ Python과 OpenCV를 활용하여 웹캠으로 특정 색상의 오브젝트를 �
 
 ## 프로젝트 실행 결과
 
-| 실행 화면 | 터미널 로그 |
+| 실행 화면 | 
 | :---: | :---: |
 | <img width="643" height="514" alt="demo png" src="https://github.com/user-attachments/assets/f53b34a5-e0ae-4040-9466-f816a6dad813" />
  |<img width="469" height="375" alt="terminal png" src="https://github.com/user-attachments/assets/e6e01a5f-ab57-424b-a8e5-4ff7ddfae7ee" />
