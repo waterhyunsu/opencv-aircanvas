@@ -31,6 +31,8 @@ upper_color = np.array([135, 255, 255])
 
 # 5. 캔버스 버퍼 초기화
 canvas = None
+prev_point = None
+min_distance = 40
 
 print("=== OpenCV Dog Stamp Air Canvas ===")
 print("C 키: 화면 초기화 | ESC 키: 종료")
@@ -67,24 +69,37 @@ while True:
 
     # 7. 강아지 스탬프 합성
     if center is not None:
-        cx, cy = center
-        half_s = stamp_size // 2
+        # 이전 지점과의 거리 계산
+        draw_stamp = False
+        if prev_point is None:
+            draw_stamp = True
+        else:
+            # 두 점 사이의 유클리드 거리 계산
+            dist = np.linalg.norm(np.array(center) - np.array(prev_point))
+            if dist > min_distance:
+                draw_stamp = True
 
-        y1, y2 = max(0, cy - half_s), min(h, cy + half_s)
-        x1, x2 = max(0, cx - half_s), min(w, cx + half_s)
+        # 설정한 간격 이상 움직였을 때만 스탬프 찍기
+        if draw_stamp:
+            cx, cy = center
+            half_s = stamp_size // 2
 
-        dog_y1, dog_y2 = half_s - (cy - y1), half_s + (y2 - cy)
-        dog_x1, dog_x2 = half_s - (cx - x1), half_s + (x2 - cx)
+            y1, y2 = max(0, cy - half_s), min(h, cy + half_s)
+            x1, x2 = max(0, cx - half_s), min(w, cx + half_s)
 
-        if (y2 > y1) and (x2 > x1):
-            overlay = dog_img[dog_y1:dog_y2, dog_x1:dog_x2]
+            dog_y1, dog_y2 = half_s - (cy - y1), half_s + (y2 - cy)
+            dog_x1, dog_x2 = half_s - (cx - x1), half_s + (x2 - cx)
 
-            # Alpha 채널 기반 블렌딩
-            alpha_mask = overlay[:, :, 3] / 255.0
-            for c in range(0, 3):
-                canvas[y1:y2, x1:x2, c] = (
-                    alpha_mask * overlay[:, :, c] + (1.0 - alpha_mask) * canvas[y1:y2, x1:x2, c]
-                )
+            if (y2 > y1) and (x2 > x1):
+                overlay = dog_img[dog_y1:dog_y2, dog_x1:dog_x2]
+                alpha_mask = overlay[:, :, 3] / 255.0
+                for c in range(0, 3):
+                    canvas[y1:y2, x1:x2, c] = (
+                        alpha_mask * overlay[:, :, c] + (1.0 - alpha_mask) * canvas[y1:y2, x1:x2, c]
+                    )
+            
+                # 스탬프를 찍은 위치를 이전 지점으로 업데이트
+                prev_point = center
 
     # 8. 원본 영상에 캔버스 합성
     gray_canvas = cv2.cvtColor(canvas, cv2.COLOR_BGR2GRAY)
